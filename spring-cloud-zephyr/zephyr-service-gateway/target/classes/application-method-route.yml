@@ -1,0 +1,22 @@
+server:
+  port: 8082
+  
+spring:
+  profiles:
+    active:
+    - method-route
+    
+---
+
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: method-route
+        uri:
+          http://httpbin.org:80/get
+        predicates:
+        - Method=GET
+  profiles:
+    active:
+    - method-route

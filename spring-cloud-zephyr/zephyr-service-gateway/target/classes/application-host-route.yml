@@ -1,0 +1,22 @@
+server:
+  port: 8082
+  
+spring:
+  profiles:
+    active:
+    - host-route
+    
+---
+
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: host-route
+        uri:
+          http://httpbin.org:80/get
+        predicates:
+        - Host=**.zephyr.com
+  profiles:
+    active:
+    - host-route

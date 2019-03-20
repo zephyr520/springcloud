@@ -1,0 +1,23 @@
+server:
+  port: 8082
+  
+spring:
+  profiles:
+    active:
+    - path-route
+    
+---
+
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: path-route
+        uri:
+          http://httpbin.org:80/get
+        predicates:
+        - Path=/foo/{segment}
+        
+  profiles:
+    active:
+    - path-route
